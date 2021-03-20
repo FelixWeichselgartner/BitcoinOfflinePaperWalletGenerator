@@ -6,7 +6,7 @@ This projects aims for a microcontroller based private key generation. The priva
 
 ## Work in progress
 
-Do NOT use this project so far. As of today the project only uses pseudo rng. In the future this will be replaced by true rng (e.g. with transistor noise generator). The code should run on any 32bit microcontoller (i.e. not on standard Arduinos, but on ESP32, ESP8266, NodeMCU, STM32, Teensy. ...). Furthermore, do not send bitcoins to any addresses in the validation folder.
+Do NOT use this project so far. As of today the project only uses pseudo rng. In the future this will be replaced by true rng (e.g. with transistor noise generator). The code should run on any 32bit microcontoller (i.e. not on standard Arduinos, but on ESP32, ESP8266, NodeMCU, STM32, Teensy, ...). Furthermore, do not send bitcoins to any addresses in the validation folder.
 
 ## Dependencies
 
