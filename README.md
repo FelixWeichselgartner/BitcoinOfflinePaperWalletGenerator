@@ -10,8 +10,11 @@ Do NOT use this project so far. As of today the project only uses pseudo rng. In
 
 ## Dependencies
 
+You can download all neccessary firmware libraries by executing `sh firmware/lib/download.sh`.
+
 Firmware:
 * https://github.com/micro-bitcoin/uBitcoin
+* https://github.com/marvinroger/ESP8266TrueRandom.git (if ESP8266 is used).
 
 Only for address validation:
 * https://github.com/PaulGregor/Bitcoin-Keys-Generator
