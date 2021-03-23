@@ -6,6 +6,10 @@
 #endif
 
 
+PrivateKey pk;
+PublicKey pubk;
+
+
 uint8_t generate_random_8bit()
 {
 #ifdef ESP32
@@ -46,14 +50,16 @@ void setup()
         pkstr += String(pkbytes[i], HEX);
     }
 
-    Serial.println("private key: " + pkstr);
+    pk = PrivateKey(pkbytes);
 
-    PrivateKey pk(pkbytes);
-    PublicKey pubk = pk.publicKey();
+    //Serial.println("private key: " + pkstr);
+    Serial.println("private key wif: " + pk.wif());
+    
+    pubk = pk.publicKey();
 
-    Serial.println("public key (legacy, segwit, nestedSwegwit):");
-    Serial.println(pubk.legacyAddress());
-    Serial.println(pubk.segwitAddress());
+    Serial.println("public key nestedSwegwit:");
+    //Serial.println(pubk.legacyAddress());
+    //Serial.println(pubk.segwitAddress());
     Serial.println(pubk.nestedSegwitAddress());
     Serial.println("end");
 }
