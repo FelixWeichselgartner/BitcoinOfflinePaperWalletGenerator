@@ -14,7 +14,7 @@ Do NOT use this project so far, as of today the project is work in progress. In 
 
 ## RNG tests
 
-Click [here](tests/TEST.md) to see the RNG tests.
+Click [here](tests/rng_validation/TEST.md) to see the RNG tests.
 
 ## Dependencies
 
