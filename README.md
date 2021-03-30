@@ -1,4 +1,4 @@
-# Bitcoin Offline Paper-Waller Generator
+# Bitcoin Offline Paper-Wallet Generator
 
 You ever felt unsave creating a Bitcoin wallet on your desktop computer or on your smartphone? As such devices are often connected to the internet there might be a chance you have already been hacked and somebody could be stealing your private key(s). The solution is to create your private keys on a device that cannot be hacked, because it is not connected to any other devices (e.g. no internet, ...). 
 
@@ -6,11 +6,15 @@ This projects aims for a microcontroller based private key generation. The priva
 
 ## Work in progress
 
-Do NOT use this project so far. As of today the project only uses pseudo rng. In the future this will be replaced by true rng (e.g. with transistor noise generator). The code should run on any 32bit microcontoller (i.e. not on standard Arduinos, but on ESP32, ESP8266, NodeMCU, STM32, Teensy, ...). Furthermore, do not send bitcoins to any addresses in the validation folder.
+Do NOT use this project so far, as of today the project is work in progress. In the future this will be replaced by true rng (e.g. with transistor noise generator). The code should run on any 32bit microcontoller (i.e. not on standard Arduinos, but on ESP32, ESP8266, NodeMCU, STM32, Teensy, ...). Furthermore, do not send bitcoins to any addresses in the validation folder.
 
 ## Breadboard testbench
 
 ![testbench_img](hardware/testbench_breadboard.png)
+
+## RNG tests
+
+Click [here](tests/TEST.md) to see the RNG tests.
 
 ## Dependencies
 
