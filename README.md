@@ -8,6 +8,10 @@ This projects aims for a microcontroller based private key generation. The priva
 
 Do NOT use this project so far. As of today the project only uses pseudo rng. In the future this will be replaced by true rng (e.g. with transistor noise generator). The code should run on any 32bit microcontoller (i.e. not on standard Arduinos, but on ESP32, ESP8266, NodeMCU, STM32, Teensy, ...). Furthermore, do not send bitcoins to any addresses in the validation folder.
 
+## Breadboard testbench
+
+![testbench_img](hardware/testbench_breadboard.png)
+
 ## Dependencies
 
 You can download all neccessary firmware libraries by executing `sh firmware/lib/download.sh`.
