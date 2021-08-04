@@ -113,6 +113,7 @@ void loop()
     case 0:
         break;
     case 1:
+        lcd.clear();
         lcd.setCursor(0, 0);
         //         01234567890123456789
         lcd.print("BTC Wallet Gen");
@@ -136,22 +137,45 @@ void loop()
         // display private key (in wif): pkwif (pkstr - optional)
         // display public address for user: pubkstr
         // on lcd display
+        if (!no_wallet_created_so_far) {
         if (page == 1)
         {
-
+            lcd.clear();
             lcd.setCursor(0, 0);
             //         01234567890123456789
+            //         --------------------
+            //         --------------------
+            //         ------------
             lcd.print("Wallet Import Format");
             lcd.setCursor(0, 1);
-            lcd.print(pkwif);
+            String line1 = pkwif.substring( 0, 20);
+            lcd.print(line1);
+            lcd.setCursor(0, 2);
+            String line2 = pkwif.substring(20, 40);
+            lcd.print(line2);
+            lcd.setCursor(0, 3);
+            String line3 = pkwif.substring(40);
+            lcd.print(line3);
         }
         else
         {
+            lcd.clear();
             lcd.setCursor(0, 0);
             //         01234567890123456789
+            //         --------------------
+            //         --------------
+            //         L5jRJp7NnLn6Koc51Ly6
+            //         FiGdtBA8dkNd4XCFHLbK
+            //         wXkrHs3BTA5n
+
             lcd.print("Public Key");
             lcd.setCursor(0, 1);
-            lcd.print(pubkstr);
+            String line1p = pubkstr.substring( 0, 20);
+            lcd.print(line1p);
+            lcd.setCursor(0, 2);
+            String line2p = pubkstr.substring(20);
+            lcd.print(line2p);
+        }
         }
 
         break;
