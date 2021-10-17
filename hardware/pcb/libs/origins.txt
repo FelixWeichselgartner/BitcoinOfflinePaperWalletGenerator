@@ -1,0 +1,5 @@
+Tactile Switch Buttons (switch-tact.lbr):
+* https://www.diymodules.org/eagle-show-library?type=usr&id=2105&part=switch-tact.lbr
+
+ESP-12E
+* https://github.com/suhail-jr/ESP8266-12E-Module-Library-For-Eagle.git

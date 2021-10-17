@@ -1,0 +1,2 @@
+WeMos D1
+* https://github.com/mcauser/Fritzing-Part-WeMos-D1-Mini.git
