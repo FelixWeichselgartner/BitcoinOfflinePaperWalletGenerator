@@ -6,11 +6,17 @@ This projects aims for a microcontroller based private key generation. The priva
 
 ## Work in progress
 
-Do NOT use this project so far, as of today the project is work in progress. In the future this will be replaced by true rng (e.g. with transistor noise generator). The code should run on any 32bit microcontoller (i.e. not on standard Arduinos, but on ESP32, ESP8266, NodeMCU, STM32, Teensy, ...). Furthermore, do not send bitcoins to any addresses in the validation folder.
+Only use this project at your own risk. I am not responsible for your usage of this code. Furthermore, do not send bitcoins to any addresses in the validation folder.
 
 ## Breadboard testbench
 
-![testbench_img](hardware/testbench_breadboard.png)
+![testbench_real](hardware/testbench/testbench_real.jpg)
+
+![testbench_img](hardware/testbench/testbench_breadboard.png)
+
+## PCB
+
+Coming very soon.
 
 ## RNG tests
 
@@ -21,11 +27,14 @@ Click [here](tests/rng_validation/TEST.md) to see the RNG tests.
 You can download all neccessary firmware libraries by executing `sh firmware/lib/download.sh`.
 
 Firmware:
-* https://github.com/micro-bitcoin/uBitcoin
-* https://github.com/marvinroger/ESP8266TrueRandom.git (if ESP8266 is used).
+* https://github.com/micro-bitcoin/uBitcoin (MIT)
+* https://github.com/marvinroger/ESP8266TrueRandom.git (LGPL-3.0 if ESP8266 is used)
+* https://github.com/adafruit/Adafruit_BusIO (MIT, for SSD1306 display)
+* https://github.com/adafruit/Adafruit-GFX-Library (BSD, for SSD1306 display)
+* https://github.com/adafruit/Adafruit_SSD1306 (BSD, for SSD1306 display)
 
 Only for address validation:
-* https://github.com/PaulGregor/Bitcoin-Keys-Generator
+* https://github.com/PaulGregor/Bitcoin-Keys-Generator (GPL-3.0)
 
 ## License
 

@@ -1,4 +1,8 @@
 samples/
 validation/Bitcoin-Keys-Generator/
 firmware/lib/uBitcoin
+firmware/lib/ESP8266TrueRandom
+firmware/lib/Adafruit_BusIO
+firmware/lib/Adafruit-GFX-Library
+firmware/lib/Adafruit_SSD1306
 ignore/

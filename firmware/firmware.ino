@@ -1,13 +1,34 @@
 #include <Bitcoin.h>
-#include <LiquidCrystal.h>
 #include <stdint.h>
 
+//#define LCD_DISPLAY
+
+#ifdef LCD_DISPLAY
+#include <LiquidCrystal.h>
 // For testbench 1:
-int button1 = D1;
+int button1 = D4;
 int button2 = D0;
-int led_board = LED_BUILTIN;
 const int PIN_RS = D3, PIN_E = D2, PIN_D4 = D5, PIN_D5 = D6, PIN_D6 = D7, PIN_D7 = D8;
 LiquidCrystal lcd(PIN_RS, PIN_E, PIN_D4, PIN_D5, PIN_D6, PIN_D7);
+#else
+#include <SPI.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+
+// Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
+// The pins for I2C are defined by the Wire-library. 
+#define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
+#define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+// d4 has to be disconnected for uploading and start up.
+int button1 = D4;
+int button2 = D0;
+#endif
 
 #ifdef ESP8266
 #include <ESP8266TrueRandom.h>
@@ -20,9 +41,12 @@ PublicKey pubk;
 bool no_wallet_created_so_far = true;
 String pkstr = "", pkwif = "", pubkstr = "";
 
+int led_board = LED_BUILTIN;
+
 uint8_t generate_random_8bit()
 {
 #ifdef ESP32
+    // this is actually untested.
     return (uint8_t)esp_random();
 #elif defined(ESP8266)
     return (uint8_t)ESP8266TrueRandom.randomByte();
@@ -32,6 +56,23 @@ uint8_t generate_random_8bit()
 #endif
 }
 
+#ifdef LCD_DISPLAY
+#else
+void led_write_text(String text) {
+    display.clearDisplay();
+
+    display.setTextSize(1);      // Normal 1:1 pixel scale
+    display.setTextColor(SSD1306_WHITE); // Draw white text
+    display.setCursor(0, 0);     // Start at top-left corner
+    display.cp437(true);         // Use full 256 char 'Code Page 437' font
+
+    display.write(text.c_str());
+    //display.write("Test by Felix Weichselgartner, Habe nun, ach! Philosophie, Juristerei and Medizin, Und leider auch Theologie Durchaus studiert, mit heißem Bemühn. Da steh' ich nun, X");
+
+    display.display();
+}
+#endif
+
 void setup()
 {
     // setup leds
@@ -39,8 +80,21 @@ void setup()
     // setup buttons
     pinMode(button1, INPUT);
     pinMode(button2, INPUT);
+
+#ifdef LCD_DISPLAY
     // setup lcd
     lcd.begin(20, 4);
+#else
+    // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
+    if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
+        Serial.println(F("SSD1306 allocation failed"));
+        for(;;); // Don't proceed, loop forever
+    }
+
+    display.clearDisplay();
+    display.display();
+#endif
+
 
 #ifdef DEBUG
     // set up serial if in debug mode
@@ -113,6 +167,7 @@ void loop()
     case 0:
         break;
     case 1:
+#ifdef LCD_DISPLAY
         lcd.clear();
         lcd.setCursor(0, 0);
         //         01234567890123456789
@@ -123,6 +178,9 @@ void loop()
         lcd.print("by Felix");
         lcd.setCursor(0, 3);
         lcd.print("Weichselgartner");
+#else
+        led_write_text("BTC Wallet Gen\nB1:gen B2:next\nby Felix\nWeichselgartner");
+#endif
         break;
     case 2:
         if (page == 1)
@@ -141,6 +199,7 @@ void loop()
         {
             if (page == 1)
             {
+#ifdef LCD_DISPLAY
                 lcd.clear();
                 lcd.setCursor(0, 0);
                 //         01234567890123456789
@@ -157,9 +216,13 @@ void loop()
                 lcd.setCursor(0, 3);
                 String line3 = pkwif.substring(40);
                 lcd.print(line3);
+#else
+                led_write_text("Wallet Import Format\n" + pkwif);
+#endif
             }
             else
             {
+#ifdef LCD_DISPLAY
                 lcd.clear();
                 lcd.setCursor(0, 0);
                 //         01234567890123456789
@@ -176,6 +239,9 @@ void loop()
                 lcd.setCursor(0, 2);
                 String line2p = pubkstr.substring(20);
                 lcd.print(line2p);
+#else
+                led_write_text("Public Key\n" + pubkstr);
+#endif
             }
         }
 
