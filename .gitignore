@@ -6,3 +6,5 @@ firmware/lib/Adafruit_BusIO
 firmware/lib/Adafruit-GFX-Library
 firmware/lib/Adafruit_SSD1306
 ignore/
+*.s#*
+*.b#*

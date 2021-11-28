@@ -1,14 +1,14 @@
 #include <Bitcoin.h>
 #include <stdint.h>
 
+int button1 = 14;
+int button2 = 16;
+
 //#define LCD_DISPLAY
 
 #ifdef LCD_DISPLAY
 #include <LiquidCrystal.h>
-// For testbench 1:
-int button1 = D4;
-int button2 = D0;
-const int PIN_RS = D3, PIN_E = D2, PIN_D4 = D5, PIN_D5 = D6, PIN_D6 = D7, PIN_D7 = D8;
+const int PIN_RS = 0, PIN_E = 4, PIN_D4 = 5, PIN_D5 = 12, PIN_D6 = 13, PIN_D7 = 15;
 LiquidCrystal lcd(PIN_RS, PIN_E, PIN_D4, PIN_D5, PIN_D6, PIN_D7);
 #else
 #include <SPI.h>
@@ -24,10 +24,6 @@ LiquidCrystal lcd(PIN_RS, PIN_E, PIN_D4, PIN_D5, PIN_D6, PIN_D7);
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
-
-// d4 has to be disconnected for uploading and start up.
-int button1 = D4;
-int button2 = D0;
 #endif
 
 #ifdef ESP8266
@@ -256,9 +252,7 @@ void loop()
     // create wallet button
     if (button2_state != edge_detector_create_wallet && button2_state == HIGH)
     {
-        no_wallet_created_so_far = false;
-        generate_wallet();
-        action = 3;
+        action = 2;
     }
 
     edge_detector_create_wallet = button2_state;
@@ -267,7 +261,9 @@ void loop()
     // next page on lcd button
     if (button1_state != edge_detector_lcd && button1_state == HIGH)
     {
-        action = 2;
+        no_wallet_created_so_far = false;
+        generate_wallet();
+        action = 3;
     }
 
     edge_detector_lcd = button1_state;

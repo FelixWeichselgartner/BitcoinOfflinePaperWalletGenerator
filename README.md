@@ -6,7 +6,7 @@ This projects aims for a microcontroller based private key generation. The priva
 
 ## Work in progress
 
-Only use this project at your own risk. I am not responsible for your usage of this code. Furthermore, do not send bitcoins to any addresses in the validation folder.
+Only use this project at your own risk. I am not responsible for your usage of this code. Furthermore, do not send bitcoins to any addresses in this repo.
 
 ## Breadboard testbench
 
@@ -16,7 +16,13 @@ Only use this project at your own risk. I am not responsible for your usage of t
 
 ## PCB
 
-Coming very soon.
+Click [here](documentation/flash_pcb.md) to see how to flash a pcb.
+
+![pcb_top](documentation/top_led.jpg)
+
+![pcb_bottom](documentation/bottom.jpg)
+
+The wires are for my revision 1 board and are already fixed in the schematic.
 
 ## RNG tests
 
